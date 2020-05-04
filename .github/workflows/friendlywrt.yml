@@ -245,17 +245,6 @@ jobs:
           release_tag=${{ steps.changelog.outputs.buildtag }}
           echo "##[set-output name=release_tag;]$release_tag"
 
-      - name: Create Release
-        if: steps.changelog.outputs.changelog != ''
-        id: create_release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ steps.assemble_artifact.outputs.release_tag }}
-          release_name: ${{ steps.assemble_artifact.outputs.release_tag }}
-          body: ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
-
       - name: Upload Release Asset
         if: steps.changelog.outputs.changelog != ''
         id: upload-release-asset
