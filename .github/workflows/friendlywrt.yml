@@ -123,7 +123,12 @@ jobs:
       - name: Install udp2raw Binaries
         run: |
           cd friendlywrt-rk3328/friendlywrt/package/base-files/files
-          wget -qO- "https://github-production-release-asset-2e65be.s3.amazonaws.com/99302204/e13b1c00-a7d9-11e9-8515-e66fe1645cc8?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200503T051227Z&X-Amz-Expires=300&X-Amz-Signature=0968832c0687fb2a6432e62801963d11b51d2bceaef9edaaa988b9625352b569&X-Amz-SignedHeaders=host&actor_id=103457&repo_id=99302204&response-content-disposition=attachment%3B%20filename%3Dudp2raw_binaries.tar.gz&response-content-type=application%2Foctet-stream" | gunzip -c > usr/bin 
+          mkdir udp2raw
+          cd udp2raw
+          wget -qO- "https://github-production-release-asset-2e65be.s3.amazonaws.com/99302204/e13b1c00-a7d9-11e9-8515-e66fe1645cc8?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200503T051227Z&X-Amz-Expires=300&X-Amz-Signature=0968832c0687fb2a6432e62801963d11b51d2bceaef9edaaa988b9625352b569&X-Amz-SignedHeaders=host&actor_id=103457&repo_id=99302204&response-content-disposition=attachment%3B%20filename%3Dudp2raw_binaries.tar.gz&response-content-type=application%2Foctet-stream" | tar -xvf
+          cp udp2raw_arm_asm_aes ../etc/bin/udp2raw
+          cd ..
+          rm -rf udp2raw
 
       - name: Update Feeds
         if: steps.changelog.outputs.changelog != ''
